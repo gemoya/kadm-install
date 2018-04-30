@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#install docker
 apt-get update
 apt-get install -y \
     apt-transport-https \
@@ -14,6 +14,8 @@ add-apt-repository \
    stable"
 
 apt-get update && apt-get install -y docker-ce=17.03.1~ce-0~ubuntu-xenial
+
+#set insecure registry
 
 echo '[Unit]
 Description=Docker Application Container Engine
@@ -49,6 +51,8 @@ WantedBy=multi-user.target' > /lib/systemd/system/docker.service
 systemctl daemon-reload
 systemctl restart docker
 
+#install fixed kubadm, kubelet, kubectl
+# CNI is (0.6.0-00), don't touch..
 
 apt-get update && apt-get install -y apt-transport-https
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
